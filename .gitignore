@@ -1,0 +1,16 @@
+artifacts
+.idea
+*.iml
+ansible.log
+.vagrant
+build
+.gradle
+*.iws
+*.ipr
+out/
+
+#eclipse files
+bin/
+.settings/
+.project
+.classpath
