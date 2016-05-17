@@ -39,16 +39,19 @@ public class SetTests {
 
             }
 
+            //TreeSet should keep elements in their "natural order", i.e., the order defined as per the Comparable interface for the element in teh Set
             writer.write("******************* Printing the integers from the TreeSet *******************");
             for(int i : treeSet) {
                 writer.write(i + "\n");
             }
 
+            //HashSet does not make any guarantee to the order, though for simpler types such as Integer, in practice the elements may be kept in their natural order
             writer.write("******************* Printing the integers from the HashSet *******************");
             for(int i : hashSet) {
                 writer.write(i + "\n");
             }
 
+            //LinkedHashSet maintains elements in their insertion order
             writer.write("******************* Printing the integers from the LinkedHashSet *******************");
             for(int i : linkedHashSet) {
                 writer.write(i + "\n");
