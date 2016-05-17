@@ -13,6 +13,8 @@ import java.util.List;
  * are not reifiable, as is the case with Generic types, you cannot create an array. As a result, you cannot easily create an array with neither type variable,
  * nor parametrized type component.
  * <p>This example shows two ways to overcome this limitation</p>
+ * Both ways make use of Reflection, while taking advantage of the fact that though you cannot instantiate an array with type variable,
+ * you can still cast to a type variable
  *
  */
 public class ArrayCreate {
@@ -23,18 +25,19 @@ public class ArrayCreate {
 
         Integer[] myHardArray = convertoArray(integers, new Integer[] {integers.size()});
 
-        Object[] mairuList = convertoArrayUsingClass(Arrays.asList("Pooru", "Kunna", "Thantha", "Kanthu", 24, 5.15), Object.class);
+        Object[] objects = convertoArrayUsingClass(Arrays.asList("Apple", "Oranges", "Bananas", "Peaches", 24, 5.15), Object.class);
 
         Arrays.stream(myHardArray).forEach(t -> System.out.print(t + ", "));
 
         System.out.println();
 
-        Arrays.stream(mairuList).forEach(t -> System.out.print(t + ", "));
+        Arrays.stream(objects).forEach(t -> System.out.print(t + ", "));
     }
 
+    //Uses a type variable array provided as the additional parameter to be able to cast to the target type
     private static <T> T[] convertoArray(List<T> list, T[] type) {
-        //T[] array = new T[list.size()]; => will not work
-        T[] array = (T[]) java.lang.reflect.Array.newInstance(type.getClass().getComponentType(), list.size());
+        //T[] array = new T[list.size()]; //=> will not work, compile error
+        T[] array = (T[]) java.lang.reflect.Array.newInstance(type.getClass().getComponentType(), list.size()); //unchecked cast
 
         for (int i = 0; i < array.length; i++) {
             array[i] = list.get(i);
@@ -43,9 +46,10 @@ public class ArrayCreate {
         return array;
     }
 
+    //Uses the generic class to get the information about component type
     private static <T> T[] convertoArrayUsingClass(List<T> list, Class<T> clazz) {
         //T[] array = new T[list.size()]; => will not work
-        T[] array = (T[]) java.lang.reflect.Array.newInstance(clazz, list.size());
+        T[] array = (T[]) java.lang.reflect.Array.newInstance(clazz, list.size()); //unchecked cast
 
         for (int i = 0; i < array.length; i++) {
             array[i] = list.get(i);
