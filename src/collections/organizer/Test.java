@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-/**
- * Created by zcheruveettil on 18.05.2016.
- */
 public class Test {
     public static void main(String[] args) {
         PhoneTask mikePhone = new PhoneTask("Mike", "987 6543");
@@ -26,5 +23,8 @@ public class Test {
         assert codingTasks.toString().equals("[code db, code gui, code logic]");
         assert mondayTasks.toString().equals("[code logic, phone Mike]");
         assert tuesdayTasks.toString().equals("[code db, code gui, phone Paul]");
+
+        Collection<Task> mergedTasks = MergeCollections.merge(mondayTasks, tuesdayTasks);
+        assert mergedTasks.toString().equals("[code db, code gui, code logic, phone Mike, phone Paul]");
     }
 }
