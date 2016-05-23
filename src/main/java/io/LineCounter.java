@@ -8,6 +8,8 @@ import java.util.StringTokenizer;
 
 /**
  * Created by zcheruveettil on 23.05.2016.
+ * 
+ * To demonstrate file reading, lines and word counting using different standard methods
  */
 public class LineCounter {
 
