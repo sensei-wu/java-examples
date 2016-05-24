@@ -3,6 +3,7 @@ package io;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -23,14 +24,17 @@ public class LineCounter {
         System.out.println("Using classic BufferedReader and FileReader");
         File file = getFile();
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file)) ){
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))){
             String line;
             int lineCount = 0;
             int wordCount = 0;
             while ((line = bufferedReader.readLine()) != null) {
                 lineCount++;
+                /* StringTokenizer is a legacy class
                 StringTokenizer st = new StringTokenizer(line);
-                wordCount += st.countTokens();
+                wordCount += st.countTokens();*/
+                String[] words = line.split("\\W+");
+                wordCount += words.length;
             }
 
             System.out.println(String.format("Total Lines %d, Number of Words %d", lineCount, wordCount));
@@ -49,9 +53,9 @@ public class LineCounter {
             int lineCount = 0;
             int wordCount = 0;
             while (scanner.hasNext()) {
-                StringTokenizer stringTokenizer = new StringTokenizer(scanner.nextLine());
                 lineCount++;
-                wordCount += stringTokenizer.countTokens();
+                String[] words = scanner.nextLine().split("\\W+");
+                wordCount += words.length;
             }
             System.out.println(String.format("Total Lines %d, Number of Words %d", lineCount, wordCount));
         } catch (FileNotFoundException e) {
@@ -63,14 +67,13 @@ public class LineCounter {
         System.out.println("Using filesMethod");
         try {
             String text = new String(Files.readAllBytes(getFile().toPath()));
-            StringTokenizer stringTokenizer = new StringTokenizer(text, "\r\n");
-            int lines = stringTokenizer.countTokens();
-            int words = 0;
-            while(stringTokenizer.hasMoreElements()) {
-                StringTokenizer wordTokenizer = new StringTokenizer(stringTokenizer.nextToken());
-                words += wordTokenizer.countTokens();
+            String[] lines = text.split("\n");
+            int lineCount = lines.length;
+            int wordCount = 0;
+            for(String line : lines) {
+                wordCount += line.split("\\W+").length;
             }
-            System.out.println(String.format("Total Lines %d, Number of Words %d", lines, words));
+            System.out.println(String.format("Total Lines %d, Number of Words %d", lineCount, wordCount));
         } catch (IOException e) {
             e.printStackTrace();
         }
