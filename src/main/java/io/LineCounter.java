@@ -3,9 +3,7 @@ package io;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 /**
  * Created by zcheruveettil on 23.05.2016.
