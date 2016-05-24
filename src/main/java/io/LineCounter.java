@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 
 /**
  * Created by zcheruveettil on 23.05.2016.
- * 
+ *
  * To demonstrate file reading, lines and word counting using different standard methods
  */
 public class LineCounter {
@@ -45,8 +45,7 @@ public class LineCounter {
     private static void scanner() {
         System.out.println("Using scanner");
         File file = getFile();
-        try {
-            Scanner scanner = new Scanner(file);
+        try (Scanner scanner = new Scanner(file)) {
             int lineCount = 0;
             int wordCount = 0;
             while (scanner.hasNext()) {
