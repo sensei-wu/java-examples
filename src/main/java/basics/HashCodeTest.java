@@ -3,6 +3,7 @@ package basics;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.StringTokenizer;
 
 /**
  * Created by zcheruveettil on 31.05.2016.
@@ -31,6 +32,14 @@ public class HashCodeTest {
         NoHashCode noHashCode = noHashCodeMap.get("noHashCode1");
         System.out.println(String.format("Retrieved the object %s from the Map using the key noHashCode1", noHashCode));
 
+        System.out.println("Checking the hashCode of an anagram");
+        String s1 = "debit card"; String s2 = "bad credit";
+        System.out.println(String.format("Hashcodes are %d and %d", s1.hashCode(), s2.hashCode()));
+
+        System.out.println("Hashcode of some common objects");
+        System.out.println(String.format("HashCode of %s is %d", "Integer(42)", new Integer(42).hashCode()));
+        System.out.println(String.format("HashCode of %s is %d", "String \"42\"", "42".hashCode()));
+        System.out.println(String.format("HashCode of %s is %d", "Boolean.TRUE", Boolean.TRUE.hashCode()));
     }
 }
 
