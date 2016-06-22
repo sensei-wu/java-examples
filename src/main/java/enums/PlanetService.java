@@ -33,7 +33,7 @@ enum Planet implements Serializable {
     URANUS(8.683e+25, 2.556e7),
     NEPTUNE(1.024e+26, 2.477e7);
 
-    //enums can have further
+    //enums can have further fields (and methods)
     private final double mass;           // In kilograms
     private final double radius;         // In meters
     private final double surfaceGravity; // In m / s^2
