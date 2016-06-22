@@ -13,6 +13,7 @@ import java.io.Serializable;
 public class PlanetService {
 
     public static void main(String[] args) {
+        //Planet, like all enums, has a static values method that returns an array of its values in the order they were declared.
         for(Planet p : Planet.values()) {
             System.out.printf("Planet %s, mass %f KG, radius %f Meters and Surface Gravity %f %n", p, p.getMass(), p.getRadius(), p.getSurfaceGravity());
         }
