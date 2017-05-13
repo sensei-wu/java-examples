@@ -1,8 +1,5 @@
 package lambdas;
 
-/**
- * Created by zen on 5/13/17.
- */
 public class SAMTestClient {
     public static void main(String[] args) {
         SAMTest samTest = new SAMTestImpl();
