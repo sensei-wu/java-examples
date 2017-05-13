@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
 /**
  * Understanding JAVA 8 Date and Time API
  */
-public class TimeAndDate {
+public class TimeSinceIwasBorn {
 
     public static void main(String[] args) {
 
