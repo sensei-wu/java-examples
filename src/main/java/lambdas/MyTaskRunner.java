@@ -6,7 +6,6 @@ public class MyTaskRunner {
         MyTask aTask = new MyTask();
         aTask.run();
 
-        //Java 8
         Runnable anotherTask = new Runnable() {
             @Override
             public void run() {
@@ -15,6 +14,7 @@ public class MyTaskRunner {
         };
         anotherTask.run();
 
+        //Java 8
         Runnable aLambdaTask = () -> System.out.println("I will do a lambda job");
         aLambdaTask.run();
     }
