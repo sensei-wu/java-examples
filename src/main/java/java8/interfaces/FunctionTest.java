@@ -7,8 +7,6 @@ import java.util.function.Function;
  */
 public class FunctionTest {
 
-    private static int anInteger = 42;
-
     public static void main(String[] args) {
 
         String aLowerCaseString = "jaba";
