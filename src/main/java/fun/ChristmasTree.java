@@ -11,17 +11,19 @@ public class ChristmasTree {
 
         while(starCount <= width) {
 
+            String space = "";
             for (int j = 0; j < spaceCount/2; j++) {
-                System.out.print(" ");
+                space += " ";
             }
 
+            System.out.print(space);
+
+            String star = "";
             for (int k = 0; k < starCount; k++) {
-                System.out.print("*");
+                star += "*";
             }
 
-            for (int j = 0; j < spaceCount/2; j++) {
-                System.out.print(" ");
-            }
+            System.out.print(star);
 
             starCount += 2;
             spaceCount -= 2;
@@ -29,6 +31,5 @@ public class ChristmasTree {
             System.out.println();
 
         }
-
     }
 }
