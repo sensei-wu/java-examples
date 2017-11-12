@@ -1,4 +1,4 @@
-package concurrency;
+package concurrency.basics;
 
 import java.time.Instant;
 import java.util.concurrent.Callable;
