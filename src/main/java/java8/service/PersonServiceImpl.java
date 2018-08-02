@@ -5,7 +5,9 @@ import java8.Person;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PersonServiceImpl implements PersonService {
@@ -32,5 +34,10 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public boolean isOlderThanOn(Person person, int age, LocalDate on) {
         return Period.between(person.getDateOfBirth(), on).getYears() >= age;
+    }
+
+    @Override
+    public Optional<Person> findOldest(List<Person> persons) {
+        return persons.stream().min(Comparator.comparing(Person::getDateOfBirth));
     }
 }
