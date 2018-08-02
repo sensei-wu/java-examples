@@ -8,6 +8,7 @@ build
 *.iws
 *.ipr
 out/
+target/
 
 #eclipse files
 bin/
