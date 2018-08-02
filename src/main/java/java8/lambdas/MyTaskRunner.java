@@ -1,4 +1,4 @@
-package lambdas;
+package java8.lambdas;
 
 public class MyTaskRunner {
     public static void main(String[] args) {

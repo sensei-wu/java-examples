@@ -1,4 +1,4 @@
-package lambdas;
+package java8.lambdas;
 
 /**
  * Unlike many other programming languages, functional programming support in Java were added only with version 8 as an afterthought

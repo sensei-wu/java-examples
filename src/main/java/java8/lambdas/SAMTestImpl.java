@@ -1,4 +1,4 @@
-package lambdas;
+package java8.lambdas;
 
 //Implementation of a Single Abstract Method Interface with a default method
 public class SAMTestImpl implements SAMTest {
