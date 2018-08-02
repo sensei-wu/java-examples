@@ -14,6 +14,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class PersonFilter {
 
@@ -48,44 +49,52 @@ public class PersonFilter {
 
     @Test
     public void oldest() {
+
+        List<Person> data = PersonUtil.personData();
+
         Person.PersonBuilder builder = new Person.PersonBuilder();
 
-        List<Person> data = new ArrayList<>();
-
         final Person aidan = builder.withFirstName("Aidan")
-                .withLastName("Götz")
+                .withLastName("Gunsu")
                 .bornOn(LocalDate.of(2011, Month.JULY, 28))
                 .ofGender(Person.Gender.MALE)
                 .build();
         data.add(aidan);
 
-        final Person zoe = builder.withFirstName("Zoe Lynn")
-                .withLastName("Götz")
+        final Person zoe = builder.withFirstName("Zoe")
+                .withLastName("Gunsi")
                 .bornOn(LocalDate.of(2015, Month.JULY, 15))
                 .ofGender(Person.Gender.FEMALE)
                 .build();
         data.add(zoe);
 
         final Person simon = builder.withFirstName("Simon")
-                .withLastName("Körbele")
+                .withLastName("Gilfond")
                 .bornOn(LocalDate.of(2011, Month.DECEMBER, 15))
                 .ofGender(Person.Gender.MALE)
                 .build();
         data.add(simon);
 
         final Person florian = builder.withFirstName("Florian")
-                .withLastName("Schalle")
+                .withLastName("Pliganjith")
                 .bornOn(LocalDate.of(2011, Month.NOVEMBER, 13))
                 .ofGender(Person.Gender.MALE)
                 .build();
         data.add(florian);
 
         final Person luisa = builder.withFirstName("Luisa")
-                .withLastName("Untekörfler")
+                .withLastName("Plisheena")
                 .bornOn(LocalDate.of(2011, Month.JULY, 18))
                 .ofGender(Person.Gender.FEMALE)
                 .build();
         data.add(luisa);
+
+        final Person vladeena = builder.withFirstName("Luisa")
+                .withLastName("Vladeena")
+                .bornOn(LocalDate.of(2011, Month.JULY, 18))
+                .ofGender(Person.Gender.FEMALE)
+                .build();
+        data.add(vladeena);
 
         PersonService personService = new PersonServiceImpl();
 

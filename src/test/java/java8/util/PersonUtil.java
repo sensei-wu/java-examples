@@ -52,6 +52,13 @@ public class PersonUtil {
                 .build();
         data.add(luisa);
 
+        final Person vladeena = builder.withFirstName("Luisa")
+                .withLastName("Vladeena")
+                .bornOn(LocalDate.of(2011, Month.JULY, 18))
+                .ofGender(Gender.FEMALE)
+                .build();
+        data.add(vladeena);
+
         return data;
 
     }
