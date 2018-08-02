@@ -2,10 +2,7 @@ package java8;
 
 import java8.service.PersonService;
 import java8.service.PersonServiceImpl;
-import java8.util.PersonUtil;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -14,43 +11,18 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.joining;
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PersonFilter {
 
-    @Disabled
-    @ParameterizedTest
-    @MethodSource("java8.util.PersonUtil#personData")
-    public void olderThan(Person person) {
-        PersonService personService = new PersonServiceImpl();
-        Assertions.assertTrue(personService.isOlderThanOn(person, 7, LocalDate.of(2018, Month.JULY, 29)));
-    }
+    final private List<Person> data = new ArrayList<>();
 
-    @Test
-    public void olderThan() {
-        Person.PersonBuilder builder = new Person.PersonBuilder();
+    private final PersonService personService = new PersonServiceImpl();
 
-        PersonService personService = new PersonServiceImpl();
-
-        final Person aidan = builder.withFirstName("Aidan")
-                .withLastName("Götz")
-                .bornOn(LocalDate.of(2011, Month.JULY, 28))
-                .ofGender(Person.Gender.MALE)
-                .build();
-
-        Assertions.assertTrue(personService.isOlderThanOn(aidan, 7, LocalDate.of(2018, Month.JULY, 29)));
-
-        Assertions.assertTrue(personService.isOlderThanOn(aidan, 7, LocalDate.of(2018, Month.JULY, 28)));
-
-        Assertions.assertFalse(personService.isOlderThanOn(aidan, 7, LocalDate.of(2018, Month.JULY, 27)));
-
-        Assertions.assertFalse(personService.isOlderThanOn(aidan, 6, LocalDate.of(2017, Month.JULY, 27)));
-    }
-
-    @Test
-    public void oldest() {
-
-        List<Person> data = PersonUtil.personData();
+    @BeforeAll
+    public void setUp() {
 
         Person.PersonBuilder builder = new Person.PersonBuilder();
 
@@ -77,7 +49,7 @@ public class PersonFilter {
 
         final Person florian = builder.withFirstName("Florian")
                 .withLastName("Pliganjith")
-                .bornOn(LocalDate.of(2011, Month.NOVEMBER, 13))
+                .bornOn(LocalDate.of(2012, Month.JANUARY, 13))
                 .ofGender(Person.Gender.MALE)
                 .build();
         data.add(florian);
@@ -89,17 +61,54 @@ public class PersonFilter {
                 .build();
         data.add(luisa);
 
-        final Person vladeena = builder.withFirstName("Luisa")
+        final Person vladeena = builder.withFirstName("Vladeena")
                 .withLastName("Vladeena")
                 .bornOn(LocalDate.of(2011, Month.JULY, 18))
                 .ofGender(Person.Gender.FEMALE)
                 .build();
         data.add(vladeena);
+    }
 
-        PersonService personService = new PersonServiceImpl();
+    private Person findPersonByFirstName(String firstName) {
+        return data.stream().filter(person -> person.getFirstName().equalsIgnoreCase(firstName)).findFirst().get();
+    }
+
+    @Disabled
+    @ParameterizedTest
+    @MethodSource("java8.util.PersonUtil#personData")
+    public void olderThan(Person person) {
+        Assertions.assertTrue(personService.isOlderThanOn(person, 7, LocalDate.of(2018, Month.JULY, 29)));
+    }
+
+    @Test
+    public void olderThan() {
+        Person.PersonBuilder builder = new Person.PersonBuilder();
+
+        final Person aidan = findPersonByFirstName("Aidan");
+
+        Assertions.assertTrue(personService.isOlderThanOn(aidan, 7, LocalDate.of(2018, Month.JULY, 29)));
+
+        Assertions.assertTrue(personService.isOlderThanOn(aidan, 7, LocalDate.of(2018, Month.JULY, 28)));
+
+        Assertions.assertFalse(personService.isOlderThanOn(aidan, 7, LocalDate.of(2018, Month.JULY, 27)));
+
+        Assertions.assertFalse(personService.isOlderThanOn(aidan, 6, LocalDate.of(2017, Month.JULY, 27)));
+    }
+
+    @Test
+    public void oldest() {
 
         final Optional<Person> oldest = personService.findOldest(data);
 
-        Assertions.assertTrue(luisa.equals(oldest.get()));
+        Assertions.assertTrue(findPersonByFirstName("luisa").equals(oldest.get()));
+    }
+
+    @Test
+    public void kidsOf2011() {
+        Assertions.assertEquals("Aidan,Simon,Luisa,Vladeena",
+                data.stream()
+                        .filter(person -> person.getDateOfBirth().getYear() == 2011)
+                        .map(Person::getFirstName)
+                        .collect(joining(",")));
     }
 }
