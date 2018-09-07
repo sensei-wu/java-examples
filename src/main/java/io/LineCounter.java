@@ -37,8 +37,6 @@ public class LineCounter {
 
             System.out.println(String.format("Total Lines %d, Number of Words %d", lineCount, wordCount));
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
